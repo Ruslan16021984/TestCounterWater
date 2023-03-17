@@ -14,7 +14,7 @@ fun NavGraphBuilder.mainNavGraph(navController: NavHostController) {
     ) {
         composable(route = NavigationItem.Splash.route) {
             WaterSplashScreen(
-                onFinishedAnimation = {
+                onToMainScreen = {
                     if (it) {
                         navController.navigate(NavigationItem.Main.route)
                     } else {

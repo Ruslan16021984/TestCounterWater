@@ -1,7 +1,6 @@
 package com.card3333333.testcounterwater.screens.splash
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.animation.OvershootInterpolator
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
@@ -24,7 +23,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.card3333333.testcounterwater.R
-import com.card3333333.testcounterwater.model.PersonUnit
 import com.card3333333.testcounterwater.screens.main.MainStateEvent
 import com.card3333333.testcounterwater.screens.main.MainViewModel
 import de.palm.composestateevents.EventEffect
@@ -35,10 +33,13 @@ import kotlinx.coroutines.delay
 @Composable
 fun WaterSplashScreen(
     viewModel: MainViewModel = hiltViewModel(),
-    onFinishedAnimation: (Boolean) -> Unit
+    onToMainScreen: (Boolean) -> Unit
 ) {
     val scale = remember {
         Animatable(0f)
+    }
+    val start = remember {
+        mutableStateOf(false)
     }
     val viewState: MainStateEvent by viewModel.viewState.collectAsStateWithLifecycle()
     viewModel.startProcess()
@@ -53,20 +54,23 @@ fun WaterSplashScreen(
             )
         )
         delay(2000L)
+        start.value = true
 
     })
-    EventEffect(
-        event = viewState.downloadGendersEvent,
-        onConsumed = viewModel::onConsumedDownloadSucceededEvents
-    ) { result ->
-        Log.e("TAG", "WaterSplashScreen: $result" )
-        if (result.isEmpty()){
-            onFinishedAnimation(true)
-        }else{
-            onFinishedAnimation(false)
-        }
+    if (start.value){
+        EventEffect(
+            event = viewState.downloadGendersEvent,
+            onConsumed = viewModel::onConsumedDownloadSucceededEvents
+        ) { result ->
+            if (result.isEmpty()){
+                onToMainScreen(true)
+            }else{
+                onToMainScreen(false)
+            }
 
+        }
     }
+
     Surface(
         modifier = Modifier
             .padding(15.dp)

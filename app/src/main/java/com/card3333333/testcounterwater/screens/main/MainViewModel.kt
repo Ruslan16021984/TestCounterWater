@@ -50,11 +50,4 @@ class MainViewModel @Inject constructor(
     fun insertUnit(unit: PersonUnit) =
         viewModelScope.launch { repository.insertUnit(unit) }
 
-
-    fun removeUnit(unit: PersonUnit) =
-        viewModelScope.launch { repository.deleteUnit(unit) }
-
-    fun removeAllUnit() =
-        viewModelScope.launch { repository.deleteAllUnits() }
-
 }

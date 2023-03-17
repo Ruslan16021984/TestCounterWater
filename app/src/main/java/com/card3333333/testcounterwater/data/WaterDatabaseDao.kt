@@ -13,6 +13,9 @@ interface WaterDatabaseDao {
     @Query("SELECT * FROM person_tbl")
     fun getGenderUnits(): Flow<List<PersonUnit>>
 
+    @Query("SELECT * FROM person_tbl")
+   suspend fun getPersonUnits(): List<PersonUnit>
+
     @Query("SELECT * FROM person_tbl WHERE water_drunk_date =:date")
    suspend fun getPersonUnitByDate(date: String): List<PersonUnit>
 

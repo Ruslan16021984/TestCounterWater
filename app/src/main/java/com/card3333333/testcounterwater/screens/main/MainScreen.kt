@@ -1,6 +1,5 @@
 package com.card3333333.testcounterwater.screens.main
 
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -17,9 +16,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import com.card3333333.testcounterwater.model.PersonUnit
-import com.card3333333.testcounterwater.navigation.graphs.NavigationItem
 import com.card3333333.testcounterwater.utils.dateToDayMounthYear
 import com.card3333333.testcounterwater.utils.targetOfWater
 import com.card3333333.testcounterwater.widgets.SaveButton
@@ -27,7 +24,6 @@ import com.card3333333.testcounterwater.widgets.WaterInputText
 import java.time.Instant
 import java.util.*
 
-//@Preview
 @Composable
 fun MainScreen(onClick: ()-> Unit
 ) {

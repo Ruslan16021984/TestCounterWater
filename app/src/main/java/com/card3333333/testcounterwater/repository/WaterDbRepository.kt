@@ -14,10 +14,12 @@ class WaterDbRepository @Inject constructor(
 
     //PersonUnit
     fun getUnits(): Flow<List<PersonUnit>> = waterDatabaseDao.getGenderUnits()
+    suspend fun getPersonUnits(): List<PersonUnit> = waterDatabaseDao.getPersonUnits()
     suspend fun insertUnit(unit: PersonUnit) = waterDatabaseDao.insertGenderUnit(unit)
-   suspend fun updateGenderByConsuming(item: PersonUnit) =
+    suspend fun updateGenderByConsuming(item: PersonUnit) =
         waterDatabaseDao.updateGenderByConsuming(item)
-   suspend fun getPersonByDate(date: String) = waterDatabaseDao.getPersonUnitByDate(date)
+
+    suspend fun getPersonByDate(date: String) = waterDatabaseDao.getPersonUnitByDate(date)
     suspend fun deleteAllUnits() = waterDatabaseDao.deleteAllPersonUnits()
     suspend fun deleteUnit(unit: PersonUnit) = waterDatabaseDao.deletePersonUnit(unit)
 }

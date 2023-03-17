@@ -1,11 +1,14 @@
 package com.card3333333.testcounterwater.screens.add
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.card3333333.testcounterwater.model.PersonUnit
 import com.card3333333.testcounterwater.repository.WaterDbRepository
 import com.card3333333.testcounterwater.utils.dateToDayMounthYear
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import java.time.Instant
 import java.util.*
@@ -18,19 +21,30 @@ class AddWaterViewModel @Inject constructor(
 
     fun updateGenderByConsuming(consuming: String, finish: () -> Unit) =
         viewModelScope.launch {
-            val result = repository.getPersonByDate(date = Date.from(Instant.now()).dateToDayMounthYear())
-            val consume = result.last().consuming.toInt() + consuming.toInt()
-            val item = PersonUnit(
-                date = result.last().date,
-                gender = result.last().gender,
-                weight = result.last().weight,
-                target = result.last().target,
-                left = result.last().left,
-                consuming = consume.toString()
-            )
-            val id = repository.updateGenderByConsuming(item)
+            val list = repository.getPersonUnits()
+            val person = list.filter { person -> person.date == Date.from(Instant.now()).dateToDayMounthYear() }
+            if (person.isEmpty()) {
+                val person = list.last()
+                val item = PersonUnit(
+                    date = Date.from(Instant.now()).dateToDayMounthYear(),
+                    gender = person.gender,
+                    weight = person.weight,
+                    target = person.target
+                )
+                repository.insertUnit(item)
+            } else {
+                val consume = person.last().consuming.toInt() + consuming.toInt()
+                val item = PersonUnit(
+                    date = person.last().date,
+                    gender = person.last().gender,
+                    weight = person.last().weight,
+                    target = person.last().target,
+                    left = person.last().left,
+                    consuming = consume.toString()
+                )
+                val id = repository.updateGenderByConsuming(item)
+                Log.e("TAG", "updateGenderByConsuming: $id", )
+            }
             finish()
-
-
         }
 }
