@@ -24,6 +24,7 @@ fun HomeScreen(
     val left = remember {
         mutableStateOf("")
     }
+
     val consuming = remember {
         mutableStateOf("120")
     }
