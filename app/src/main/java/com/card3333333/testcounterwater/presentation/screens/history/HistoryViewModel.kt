@@ -3,7 +3,6 @@ package com.card3333333.testcounterwater.presentation.screens.history
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.card3333333.testcounterwater.domain.repository.WaterDbRepository
-import com.card3333333.testcounterwater.presentation.screens.add.AddWaterState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

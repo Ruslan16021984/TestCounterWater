@@ -4,7 +4,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.card3333333.testcounterwater.presentation.screens.add.AddWater
+import com.card3333333.testcounterwater.presentation.screens.add.AddWaterScreen
 
 fun NavGraphBuilder.addWaterNavGraph(navHostController: NavHostController) {
     navigation(
@@ -12,7 +12,7 @@ fun NavGraphBuilder.addWaterNavGraph(navHostController: NavHostController) {
         route = Graph.ADD
     ) {
         composable(route = NavigationItem.Add.route) {
-            AddWater(
+            AddWaterScreen(
                 onClick = {
                     navHostController.navigate(Graph.HOME)
                 }

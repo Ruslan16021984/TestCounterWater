@@ -7,8 +7,7 @@ import com.card3333333.testcounterwater.data.model.PersonUnit
 import com.card3333333.testcounterwater.domain.repository.WaterDbRepository
 import com.card3333333.testcounterwater.utils.dateToDayMounthYear
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.time.Instant
 import java.util.*
@@ -19,6 +18,8 @@ class AddWaterViewModel @Inject constructor(
     private val repository: WaterDbRepository
 ) : ViewModel() {
 
+    private val _state = MutableStateFlow(AddWaterState.initial())
+    val state: StateFlow<AddWaterState> = _state.asStateFlow()
     fun updateGenderByConsuming(consuming: String) =
         viewModelScope.launch {
             val list = repository.getPersonUnits()
@@ -43,7 +44,11 @@ class AddWaterViewModel @Inject constructor(
                     consuming = consume.toString()
                 )
                 val id = repository.updateGenderByConsuming(item)
-                Log.e("TAG", "updateGenderByConsuming: $id", )
+                _state.update {
+                    it.copy(
+                        updateValue = true
+                    )
+                }
             }
         }
 }
