@@ -6,8 +6,8 @@ import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
-import com.card3333333.testcounterwater.navigation.graphs.RootNavigationGraph
-import com.card3333333.testcounterwater.ui.theme.TestCounterWaterTheme
+import com.card3333333.testcounterwater.presentation.navigation.graphs.RootNavigationGraph
+import com.card3333333.testcounterwater.presentation.ui.theme.TestCounterWaterTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

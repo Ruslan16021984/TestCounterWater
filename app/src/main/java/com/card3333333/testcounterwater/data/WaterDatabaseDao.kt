@@ -1,8 +1,8 @@
 package com.card3333333.testcounterwater.data
 
 import androidx.room.*
-import com.card3333333.testcounterwater.model.PersonUnit
-import com.card3333333.testcounterwater.model.Water
+import com.card3333333.testcounterwater.data.model.PersonUnit
+import com.card3333333.testcounterwater.data.model.Water
 import kotlinx.coroutines.flow.Flow
 import java.util.Date
 
